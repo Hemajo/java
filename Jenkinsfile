@@ -3,20 +3,19 @@ pipeline{
   stages{
       stage("Scan"){
         steps{
-         withSonarQubeEnv(installationName:'sonar',credentialsId:'sonar') {
-         sh "mvn sonar:sonar"
+         withSonarQubeEnv('sonar') {
+         sh "mvn clean package sonar:sonar"
          }
         }
       }
       stage("Build"){
         steps{
-            sh "mvn -B -DskipTests clean package"
-            sh "mv target/*.war target/myweb.war"
+            sh '"mvn" -Dmaven.test.failure.ignore clean install'
              }
             }
       stage('Test') {
         steps {
-        sh(script: 'mvn -Dmaven.test.failure.ignore test')
+          sh 'mvn test'
       }
       post {
         always {
