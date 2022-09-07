@@ -21,7 +21,7 @@ pipeline{
 
          withSonarQubeEnv(installationName:'sonar',credentialsId:'sonar') {
 
-         sh "mvn sonar:sonar"
+         sh "mvn clean deploy sonar:sonar"
 
          }
 
