@@ -23,5 +23,17 @@ pipeline{
       }
     }
     }
+	  stage('Deploy'){
+            steps {
+			withCredentials([[$class: 'AmazonWebServicesCredentialsBinding',
+    credentialsId: 'aws-cred',
+    accessKeyVariable: 'AKIAX3RJV4U6KHNM6P5R',
+    secretKeyVariable: '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']]) {
+    			sh 'aws eks update-kubeconfig --region us-east-1 --name java-login-app-3'
+                 sh 'usr/local/bin/kubectl apply -f deployment.yml'
+				}
+				 
+            }
+		}
     }
 }
