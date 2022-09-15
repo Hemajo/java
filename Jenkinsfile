@@ -10,30 +10,18 @@ pipeline{
 		stage("Docker Build"){
 		steps{
 			script{
-				app = docker.build("ecr-pipeline:${env.BUILD_NUMBER}")
+				app = docker.build("pipeline3:${env.BUILD_NUMBER}")
                 }
              }
           }
 		stage("Docker Push"){
 		steps{
 			script{
-				docker.withRegistry('https://540179555644.dkr.ecr.us-east-1.amazonaws.com', 'ecr:us-east-1:aws-cred') {
+				docker.withRegistry('https://083986437940.dkr.ecr.ap-southeast-1.amazonaws.com', 'ecr:ap-southeast-1:aws-id') {
 				app.push("${env.BUILD_NUMBER}")
         }
       }
     }
     }
-	  stage('Deploy'){
-            steps {
-			withCredentials([[$class: 'AmazonWebServicesCredentialsBinding',
-    credentialsId: 'aws-cred',
-    accessKeyVariable: 'AKIAX3RJV4U6KHNM6P5R',
-    secretKeyVariable: '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']]) {
-    			sh 'aws eks update-kubeconfig --region us-east-1 --name java-login-app'
-                 sh '/root/bin/kubectl apply -f deployment.yml'
-				}
-				 
-            }
-		}
-    }
+  }
 }
