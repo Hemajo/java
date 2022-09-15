@@ -32,3 +32,7 @@ pipeline{
     			sh 'aws eks update-kubeconfig --region ap-southeast-1 --name my-cluster'
                  sh '/root/bin/kubectl apply -f deployment.yml'
 				}
+	    }
+  }
+  }
+}
