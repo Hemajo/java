@@ -1,12 +1,12 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: my-cluster
+  name: java-login-app
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: my-cluster
+      app: java-login-app
   minReadySeconds: 5
   strategy:
     type: RollingUpdate
@@ -16,11 +16,11 @@ spec:
   template:
     metadata:
       labels:
-        app: my-cluster
+        app: java-login-app
     spec:
       containers:
         - name: java-app
-          image: 540179555644.dkr.ecr.ap-south-1.amazonaws.com/pipeline3:17
+          image: 540179555644.dkr.ecr.us-east-1.amazonaws.com/ecr-pipeline:1
           ports:
             - containerPort: 8080
           env:
@@ -30,7 +30,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: my-cluster
+  name: java-login-app
 spec:
   type: LoadBalancer
   ports:
