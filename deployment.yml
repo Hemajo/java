@@ -1,12 +1,12 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: java-login-app
+  name: java-web-app
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: java-login-app
+      app: java-web-app
   minReadySeconds: 5
   strategy:
     type: RollingUpdate
@@ -16,7 +16,7 @@ spec:
   template:
     metadata:
       labels:
-        app: java-login-app
+        app: java-web-app
     spec:
       containers:
         - name: java-app
@@ -30,7 +30,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: java-login-app
+  name: java-web-app
 spec:
   type: LoadBalancer
   ports:
