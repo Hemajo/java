@@ -9,6 +9,7 @@ pipeline {
 
 
                sh "mvn clean install"
+               sh "mv target/*.war target/myweb.war"
             }
         
         }
