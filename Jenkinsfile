@@ -17,7 +17,7 @@ pipeline{
 		stage("Docker Push"){
 		steps{
 			script{
-				docker.withRegistry('https://083986437940.dkr.ecr.ap-southeast-1.amazonaws.com', 'ecr:ap-southeast-1:aws-id') {
+				docker.withRegistry('https://083986437940.dkr.ecr.ap-southeast-1.amazonaws.com', 'ecr:ap-southeast-1:user1-cred') {
 				app.push("${env.BUILD_NUMBER}")
         }
       }
@@ -26,9 +26,9 @@ pipeline{
   stage('Deploy'){
             steps {
 			withCredentials([[$class: 'AmazonWebServicesCredentialsBinding',
-    credentialsId: 'aws-id',
-    accessKeyVariable: 'AKIARHDP3K42BBJFFTEY',
-    secretKeyVariable: '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']]) {
+    credentialsId: 'user1-cred',
+    accessKeyVariable: 'AKIARHDP3K42AMB5MUMI',
+    secretKeyVariable: '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']]) {
     			sh 'aws eks update-kubeconfig --region ap-southeast-1 --name eks-cluster'
                  sh 'usr/local/bin/kubectl apply -f deployment.yml'
 				}
