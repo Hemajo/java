@@ -27,8 +27,8 @@ pipeline{
             steps {
 			withCredentials([[$class: 'AmazonWebServicesCredentialsBinding',
     credentialsId: 'user1-cred',
-    accessKeyVariable: 'AKIARHDP3K42AMB5MUMI',
-    secretKeyVariable: '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']]) {
+    accessKeyVariable: '',
+    secretKeyVariable: '']]) {
     			sh 'aws eks update-kubeconfig --region ap-southeast-1 --name eks-cluster'
                  sh 'usr/local/bin/kubectl apply -f deployment.yml'
 				}
