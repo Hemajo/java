@@ -29,7 +29,7 @@ pipeline{
     credentialsId: 'aws-id',
     accessKeyVariable: 'AKIARHDP3K42BBJFFTEY',
     secretKeyVariable: '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']]) {
-    			sh 'aws eks update-kubeconfig --region ap-southeast-1 --name my-cluster'
+    			sh 'aws eks update-kubeconfig --region ap-southeast-1 --name eks-cluster'
                  sh 'usr/local/bin/kubectl apply -f deployment.yml'
 				}
 	    }
